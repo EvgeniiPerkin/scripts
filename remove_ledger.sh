@@ -88,7 +88,7 @@ main(){
 
     if [[ $3 ]]; then
         printf_n "${C_LGn}Cleaning the directory $1*${RES}"
-        rm -rf "$1/*"
+        rm -rf $1/*
     fi
 
     if ! [ -d /root/solana/solana-snapshot-finder/ ]; then
