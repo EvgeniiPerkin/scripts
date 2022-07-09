@@ -50,19 +50,19 @@ done
 
 printf_n(){ printf "$1\n" "${@:2}"; }
 
-delete_ledger_main_network()){
+delete_ledger_main_network(){
     main $1 "m" true
 }
 
-main_network()){
+main_network(){
     main $1 "m" false
 }
 
-delete_ledger_test_network()){
+delete_ledger_test_network(){
     main $1 "t" true
 }
 
-test_network()){
+test_network(){
     main $1 "t" false
 }
 
