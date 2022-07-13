@@ -2,5 +2,5 @@
 ====================
 
 
-      . <(wget -qO- https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/starcnet.sh)
+      . <(wget -qO- https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/starknet.sh)
       
