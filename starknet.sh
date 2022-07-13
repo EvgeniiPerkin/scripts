@@ -18,7 +18,7 @@ main(){
     source .venv/bin/activate
     PIP_REQUIRE_VIRTUALENV=true pip install -r requirements-dev.txt
     systemctl restart starknetd
-    local version=pathfinder -V
+    version=pathfinder -V
     printf_n "${C_LGn}$version${RES}"
     printf_n "${C_LGn}Done.${RES}"
 }
