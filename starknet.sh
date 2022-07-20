@@ -11,7 +11,7 @@ main(){
     . <(wget -qO- https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/logo.sh)
     cd ~/pathfinder
     git fetch
-    git checkout v0.2.5-alpha
+    git checkout v0.2.6-alpha
     cargo build --release --bin pathfinder
     mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
     cd py
@@ -19,7 +19,7 @@ main(){
     PIP_REQUIRE_VIRTUALENV=true pip install -r requirements-dev.txt
     systemctl restart starknetd
     pathfinder -V
-    printf_n "${C_LGn}Done.${RES}"
+    printf_n "${C_LGn}Done...${RES}"
 }
 
 $function
