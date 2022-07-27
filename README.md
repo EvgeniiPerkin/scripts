@@ -1,8 +1,10 @@
-Пример использования
-====================
+# Пример использования скриптов:
 
-
-      . <(wget -qO- https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/starknet.sh)
-
-      . <(wget -qO- https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/sui.sh)
-      
+## starknet
+```
+. <(wget -qO- https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/starknet.sh)
+```
+## sui
+```
+. <(wget -qO- https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/sui.sh)
+```   
