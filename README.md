@@ -13,4 +13,9 @@ wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/sui.sh | 
 ```
 bash <(curl -Ls https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/sui.sh)
 ```
-
+```
+bash <(curl -Ls https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/update_db_sui.sh)
+```
+```
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/update_db_sui.sh | bash
+```
