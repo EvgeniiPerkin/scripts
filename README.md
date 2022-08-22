@@ -19,3 +19,10 @@ bash <(curl -Ls https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/upd
 ```
 wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/update_db_sui.sh | bash
 ```
+
+```
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_ek.sh | bash
+```
+```
+bash <(curl -Ls https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_ek.sh)
+```
