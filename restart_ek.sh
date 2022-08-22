@@ -15,7 +15,7 @@ main() {
     printf_n "${C_LGn}rm ledger...${RES}"
     rm -rf /mnt/ledger/*
     printf_n "${C_LGn}work snapshot-finder...${RES}"
-    python3 snapshot-finder.py --snapshot_path /mnt/ledger/ledger -r http://api.testnet.solana.com --min_download_speed 5
+    python3 snapshot-finder.py --snapshot_path /mnt/ledger -r http://api.testnet.solana.com --min_download_speed 5
     printf_n "${C_LGn}start solana...${RES}"
     systemctl start solana
     printf_n "${C_LGn}Done...${RES}"
