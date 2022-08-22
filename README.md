@@ -22,5 +22,5 @@ wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/update_db
 
 ## solana
 ```
-wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_ek.sh | bash /dev/stdin -k <path ledger>
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_ek.sh | bash /dev/stdin -l <path ledger>
 ```
