@@ -20,9 +20,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/upd
 wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/update_db_sui.sh | bash
 ```
 
+## solana
 ```
-wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_ek.sh | bash
-```
-```
-bash <(curl -Ls https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_ek.sh)
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_ek.sh | bash /dev/stdin -k <path ledger>
 ```
