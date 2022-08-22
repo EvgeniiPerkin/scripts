@@ -34,7 +34,6 @@ main() {
         printf_n "${C_R}You have not specified a directory for the ledger!!!${RES}"
         return 0
     fi
-    . <(wget -qO- https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/logo.sh)
     printf_n "${C_LGn}Stop solana service...${RES}"
     systemctl stop solana
     cd /root/solana/solana-snapshot-finder/
