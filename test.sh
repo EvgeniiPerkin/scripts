@@ -1,4 +1,22 @@
 #!/bin/bash
 # Default variables
-rm -rf $1/*
-echo "done $1"
+read -p 'Username Firstname: ' uservar namevar
+read -sp 'Password: ' passvar
+echo
+tee <<EOF >/dev/null /home/user/work/service.test
+[Unit]
+Description=Massa Node
+After=network-online.target
+
+[Service]
+User=$uservar
+WorkingDirectory='$namevar'
+ExecStart="$namevar"
+Restart=on-failure
+RestartSec=3
+LimitNOFILE=65535
+pass=$passvar
+
+[Install]
+WantedBy=multi-user.target
+EOF

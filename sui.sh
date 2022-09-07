@@ -18,3 +18,4 @@ cp /usr/local/bin/sui-node $(which sui-node)
 cp /usr/local/bin/sui $(which sui)
 systemctl restart suid
 sui -V
+wget -qO- eth0.me
