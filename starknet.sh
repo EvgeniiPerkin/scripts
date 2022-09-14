@@ -10,15 +10,13 @@ printf_n(){ printf "$1\n" "${@:2}"; }
 main(){
     . <(wget -qO- https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/logo.sh)
     cd ~/pathfinder
-    rustup update
     git fetch
-    git checkout v0.3.3
+    git checkout v0.3.4
     cargo build --release --bin pathfinder
     mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
     cd py
     source .venv/bin/activate
     PIP_REQUIRE_VIRTUALENV=true pip install -r requirements-dev.txt
-    pip install --upgrade pip
     systemctl restart starknetd
     pathfinder -V
     wget -qO- eth0.me
