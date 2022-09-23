@@ -11,7 +11,7 @@ main(){
     . <(wget -qO- https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/logo.sh)
     cd ~/pathfinder
     git fetch
-    git checkout v0.3.4
+    git checkout v0.3.5
     cargo build --release --bin pathfinder
     mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
     cd py
