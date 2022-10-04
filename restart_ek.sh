@@ -37,6 +37,7 @@ main() {
     printf_n "${C_LGn}Stop solana service...${RES}"
     systemctl stop solana
     cd /root/solana/solana-snapshot-finder/
+	source ./venv/bin/activate
     printf_n "${C_LGn}rm ledger...${RES}"
     rm -rf $1/*
     printf_n "${C_LGn}work snapshot-finder...${RES}"
