@@ -68,18 +68,18 @@ get_path_ledger() {
 main() {
 	. <(wget -qO- https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/logo.sh)
     
-    printf_n "${C_LGn}Get the ledger catalog.RES}"
+    printf_n "${C_LGn}Get the ledger catalog.${RES}"
     get_path_ledger
     printf_n "${C_Gy}$PATH_LEDGER${RES}"
-    printf_n "${C_LGn}Check the ledger catalog.RES}"
+    printf_n "${C_LGn}Check the ledger catalog.${RES}"
     if ! [ -d $PATH_LEDGER ]; then
-        printf_n "${C_R}There is no ledger directory.RES}"
-        printf_n "${C_R}Check the path of the ledger in the solana service file.RES}" 
-        printf_n "${C_R}Not completed.RES}"
+        printf_n "${C_R}There is no ledger directory.${RES}"
+        printf_n "${C_R}Check the path of the ledger in the solana service file.${RES}" 
+        printf_n "${C_R}Not completed.${RES}"
         return 1 2>/dev/null; exit 1
     fi
     
-    printf_n "${C_LGn}Updating packages.RES}"
+    printf_n "${C_LGn}Updating packages.${RES}"
     sudo apt update -y &>/dev/null
     sudo apt upgrade -y &>/dev/null
     
@@ -89,7 +89,7 @@ main() {
     printf_n "${C_LGn}Stop solana service.${RES}"
     systemctl stop solana.service
     
-    printf_n "${C_LGn}Cleaning the directory $PATH_LEDGER*${RES}"
+    printf_n "${C_LGn}Cleaning the directory $PATH_LEDGER/*${RES}"
     rm -rf $PATH_LEDGER/*
     
     if [ -d $PATH_FINDER ]; then
