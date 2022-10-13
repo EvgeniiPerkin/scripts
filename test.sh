@@ -14,5 +14,3 @@ do
         echo $path_ledger
     fi
 done < /root/solana/solana.service
-
-echo $1

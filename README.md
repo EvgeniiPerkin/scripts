@@ -20,7 +20,24 @@ bash <(curl -Ls https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/upd
 wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/update_db_sui.sh | bash
 ```
 
-## solana
+## SOLANA
+### ek (test net)
 ```
-wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_ek.sh | bash /dev/stdin -l <path ledger>
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_ek.sh | bash /dev/stdin -l /mnt/ledger/ledger
+```
+### main net
+```
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin -m
+```
+### main net limit the speed
+```
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin -m limit
+```
+### test net
+```
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin -t
+```
+### test net limit the speed
+```
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin -t limit
 ```

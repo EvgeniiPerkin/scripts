@@ -3,43 +3,36 @@
 
 C_LGn='\033[1;32m'
 C_R='\033[0;31m'
+C_Gy='\033[1;37m'
 RES='\033[0m'
 SOLANA_PATH="/root/.local/share/solana/install/active_release/bin/solana"
+SOLANA_SERVICE_FILE="/root/solana/solana.service"
+PATH_FINDER="/root/solana/solana-snapshot-finder/"
+PATH_LEDGER=""
 
-# Options
-option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
 	case "$1" in
 	-h|--help)
 		. <(wget -qO- https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/logo.sh)
 		echo
-		echo -e "${C_LGn}Functionality${RES}: script for restarting the solana node with the removal of the messenger"
+		echo -e "${C_LGn}Functionality${RES}: script for restarting the solana node"
 		echo
-		echo -e "${C_LGn}Usage${RES}: script ${C_LGn}[OPTIONS]${RES} ${C_R}/root/solana/ledger${RES}"
-		echo
+        echo -e "${C_LGn}Usage${RES}: script ${C_LGn}[OPTIONS]${RES} ${C_R}limit${RES}"
+        echo
 		echo -e "${C_LGn}Options${RES}:"
-        echo -e "  -h,   --help                         show the help page"
-        echo -e "  -dm,  --delete-ledger-main           delete the ledger and run the fender on the main network"
-        echo -e "  -m,   --main                         run the fender on the main network"
-        echo -e "  -dt,  --delete-ledger-test           delete the ledger and run the fender on the test network"
-        echo -e "  -t,   --test                         run the fender on the test network"
-		echo
+        echo -e "  -t,   --testnet                       test net"
+        echo -e "  -m,   --mainnet                       main net"
+		echo 
+        echo -e "   limit                                limit the speed download snapshot"
+        echo
 		return 0
 		;;
-	-dm|--delete-ledger-main)
-		function="delete_ledger_main_network $2"
+	-t|--testnet)
+		function="main testnet $2"
 		shift
 		;;
-	-m|--main)
-		function="main_network $2"
-		shift
-		;;
-	-dt|--delete-ledger-test)
-		function="delete_ledger_test_network $2"
-		shift
-		;;
-	-t|--test)
-		function="test_network $2"
+	-m|--mainnet)
+		function="main mainnet $2"
 		shift
 		;;
 	*|--)
@@ -50,24 +43,9 @@ done
 
 printf_n(){ printf "$1\n" "${@:2}"; }
 
-delete_ledger_main_network(){
-    main $1 "m" true
-}
-
-main_network(){
-    main $1 "m" false
-}
-
-delete_ledger_test_network(){
-    main $1 "t" true
-}
-
-test_network(){
-    main $1 "t" false
-}
-
 install_solana_snapshot_finder(){
-    printf_n "${C_LGn}Install snapshot-finder${RES}"
+    printf_n "${C_LGn}Install snapshot-finder.${RES}"
+    cd /root/solana/
     git clone https://github.com/c29r3/solana-snapshot-finder.git \
         && cd solana-snapshot-finder \
         && python3 -m venv venv \
@@ -75,42 +53,66 @@ install_solana_snapshot_finder(){
         && pip3 install -r requirements.txt
 }
 
-main(){
-    if [[ $1 == "" ]]; then
-        printf_n "${C_R}You have not specified a directory for the ledger!!!${RES}"
-        return 0
+get_path_ledger() {
+    while IFS= read -r line
+    do
+        if [[ "$line" == *"--ledger"* ]]; then
+            PATH_LEDGER="$line"
+            PATH_LEDGER=${PATH_LEDGER#-*r}
+            local l=${#PATH_LEDGER}-3
+            PATH_LEDGER=${PATH_LEDGER:1:$l}
+        fi
+    done < $SOLANA_SERVICE_FILE
+}
+
+main() {
+	. <(wget -qO- https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/logo.sh)
+    
+    printf_n "${C_LGn}Get the ledger catalog.RES}"
+    get_path_ledger
+    printf_n "${C_Gy}$PATH_LEDGER${RES}"
+    printf_n "${C_LGn}Check the ledger catalog.RES}"
+    if ! [ -d $PATH_LEDGER ]; then
+        printf_n "${C_R}There is no ledger directory.RES}"
+        printf_n "${C_R}Check the path of the ledger in the solana service file.RES}" 
+        printf_n "${C_R}Not completed.RES}"
+        return 1 2>/dev/null; exit 1
     fi
-    printf_n "${C_LGn}Stop solana service...${RES}"
+    
+    printf_n "${C_LGn}Updating packages.RES}"
+    sudo apt update -y &>/dev/null
+    sudo apt upgrade -y &>/dev/null
+    
+    printf_n "${C_LGn}Install git.${RES}"
+    sudo apt install git -y &>/dev/null
+    
+    printf_n "${C_LGn}Stop solana service.${RES}"
     systemctl stop solana.service
-
-    printf_n "${C_LGn}Updating and install default packages...${RES}"
-    apt-get update && apt-get install python3-venv git -y 
-
-    if [[ $3 ]]; then
-        printf_n "${C_LGn}Cleaning the directory $1*${RES}"
-        rm -rf $1/*
-    fi
-
-    if ! [ -d /root/solana/solana-snapshot-finder/ ]; then
+    
+    printf_n "${C_LGn}Cleaning the directory $PATH_LEDGER*${RES}"
+    rm -rf $PATH_LEDGER/*
+    
+    if [ -d $PATH_FINDER ]; then
+        cd $PATH_FINDER
+        git pull
+        source ./venv/bin/activate 
+    else
         printf_n "${C_LGn}There is no snapshot-finder directory${RES}"
         install_solana_snapshot_finder
     fi
-    if ! [ -f /root/solana/solana-snapshot-finder/snapshot-finder.py ]; then
-        printf_n "${C_LGn}There is no snapshot-finder file${RES}"
-        rm -rf /root/solana/solana-snapshot-finder/
-        install_solana_snapshot_finder
-    fi 
-
-    cd /root/solana/solana-snapshot-finder/
-
-    if [[ $2 == "m" ]]; then
-        python3 snapshot-finder.py --snapshot_path $1
-    elif [[ $2 == "t" ]]; then
-        python3 snapshot-finder.py --snapshot_path $1 -r http://api.testnet.solana.com
+    
+    limit_speed=""
+    if [[ $2 == "limit" ]]; then
+        limit_speed="--min_download_speed 5"
     fi
-
+    if [[ $1 == "mainnet" ]]; then
+        python3 snapshot-finder.py --snapshot_path $PATH_LEDGER $limit_speed
+    elif [[ $1 == "testnet" ]]; then
+        python3 snapshot-finder.py --snapshot_path $PATH_LEDGER -r http://api.testnet.solana.com $limit_speed
+    fi
+    
     printf_n "${C_LGn}Start solana service...${RES}"
-    systemctl start solana
-    printf_n "${C_LGn}Done. Check the cathup solana!${RES}"
+    systemctl start solana.service
 }
+
 $function
