@@ -12,7 +12,7 @@ main(){
     cd ~/pathfinder
     rustup update
     git fetch
-    git checkout v0.3.6
+    git checkout v0.3.7
     cargo build --release --bin pathfinder
     mv ~/pathfinder/target/release/pathfinder /usr/local/bin/
     cd py
