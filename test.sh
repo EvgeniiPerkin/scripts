@@ -12,5 +12,6 @@ do
         path_ledger=${path_ledger:1:$l}
         echo ${#path_ledger}
         echo $path_ledger
+        
     fi
 done < /root/solana/solana.service
