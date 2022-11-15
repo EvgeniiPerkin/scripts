@@ -17,15 +17,15 @@ while test $# -gt 0; do
 		echo
 		echo -e "${C_LGn}Functionality${RES}: script for restarting the solana node"
 		echo
-    echo -e "${C_LGn}Usage${RES}: script ${C_LGn}[OPTIONS]${RES}"
-    echo
+        echo -e "${C_LGn}Usage${RES}: script ${C_LGn}[OPTIONS]${RES}"
+        echo
 		echo -e "${C_LGn}Options${RES}:"
-    echo -e "  -t,   --testnet                       test net"
-    echo -e "  -m,   --mainnet                       main net"
+        echo -e "  -t,   --testnet                       test net"
+        echo -e "  -m,   --mainnet                       main net"
 		echo 
-    echo -e "  -tl,  --testnet-limit                 limit the speed download snapshot testnet"
-    echo -e "  -ml,  --mainnet-limit                 limit the speed download snapshot mainnet"
-    echo
+        echo -e "  -tl,  --testnet-limit                 limit the speed download snapshot testnet"
+        echo -e "  -ml,  --mainnet-limit                 limit the speed download snapshot mainnet"
+        echo
 		return 0
 		;;
 	-t|--testnet)
@@ -36,14 +36,14 @@ while test $# -gt 0; do
 		function="main mainnet"
 		shift
 		;;
-  -tl|--testnet-limit)
-    function="main testnet $2"
-    shift
-    ;;
-  -ml|--mainnet-limit)
-    function="main mainnet $2"
-    shift
-    ;;
+    -tl|--testnet-limit)
+        function="main testnet $2"
+        shift
+        ;;
+    -ml|--mainnet-limit)
+        function="main mainnet $2"
+        shift
+        ;;
 	*|--)
 		break
 		;;
