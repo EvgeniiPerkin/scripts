@@ -17,24 +17,33 @@ while test $# -gt 0; do
 		echo
 		echo -e "${C_LGn}Functionality${RES}: script for restarting the solana node"
 		echo
-        echo -e "${C_LGn}Usage${RES}: script ${C_LGn}[OPTIONS]${RES} ${C_R}limit${RES}"
-        echo
+    echo -e "${C_LGn}Usage${RES}: script ${C_LGn}[OPTIONS]${RES}"
+    echo
 		echo -e "${C_LGn}Options${RES}:"
-        echo -e "  -t,   --testnet                       test net"
-        echo -e "  -m,   --mainnet                       main net"
+    echo -e "  -t,   --testnet                       test net"
+    echo -e "  -m,   --mainnet                       main net"
 		echo 
-        echo -e "   limit                                limit the speed download snapshot"
-        echo
+    echo -e "  -tl,  --testnet-limit                 limit the speed download snapshot testnet"
+    echo -e "  -ml,  --mainnet-limit                 limit the speed download snapshot mainnet"
+    echo
 		return 0
 		;;
 	-t|--testnet)
-		function="main testnet $2"
+		function="main testnet"
 		shift
 		;;
 	-m|--mainnet)
-		function="main mainnet $2"
+		function="main mainnet"
 		shift
 		;;
+  -tl|--testnet-limit)
+    function="main testnet $2"
+    shift
+    ;;
+  -ml|--mainnet-limit)
+    function="main mainnet $2"
+    shift
+    ;;
 	*|--)
 		break
 		;;
@@ -102,8 +111,8 @@ main() {
     fi
     
     limit_speed=""
-    if [[ $2 == "limit" ]]; then
-        limit_speed="--min_download_speed 5"
+    if [[ $2 != "" ]]; then
+        limit_speed="--min_download_speed $2"
     fi
     if [[ $1 == "mainnet" ]]; then
         python3 snapshot-finder.py --snapshot_path $PATH_LEDGER $limit_speed
