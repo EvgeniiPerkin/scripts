@@ -29,15 +29,27 @@ wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_e
 ```
 wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin -m
 ```
+```
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin --mainnet
+```
 ### main net limit the speed
 ```
-wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin -m limit
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin -ml 20
+```
+```
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin --mainnet-limit 20
 ```
 ### test net
 ```
 wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin -t
 ```
+```
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin --testnet
+```
 ### test net limit the speed
 ```
-wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin -t limit
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin -tl 5
+```
+```
+wget -O - https://raw.githubusercontent.com/EvgeniiPerkin/scripts/main/restart_solana.sh | bash /dev/stdin --testnet-limit 5
 ```
